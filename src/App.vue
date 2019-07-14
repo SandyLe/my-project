@@ -7,13 +7,13 @@
 </template>
 
 <script>
-    import Header from './components/Header.vue';
-    export default {
-      name: 'App',
-      components: {
-        'app-header': Header
-      }
-    }
+import Header from './components/Header.vue'
+export default {
+  name: 'App',
+  components: {
+    'app-header': Header
+  }
+}
 </script>
 
 <style>

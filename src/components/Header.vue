@@ -10,26 +10,24 @@
         </div>
       </div>
       <div style="float: right;">
-        <ul style="list-style-type:none;">
+        <app-dropDownMenu></app-dropDownMenu>
+        <!--<ul style="list-style-type:none;">
           <li v-for="(item,index) in navData" :key="index" style="width:100px; float:left; padding-top: 45px;">
-            <router-link to="/index">{{item}}</router-link>
-            <div>
-              <ul style="overflow: hidden; list-style-type: none; overflow: hidden;">
-                <li style="overflow: hidden;position: relative;z-index: auto;">1</li>
-                <li style="overflow: hidden;position: relative;z-index: auto;">2</li>
-                <li style="overflow: hidden;position: relative;z-index: auto;">3</li>
-              </ul>
-            </div>
+            <router-link to="/">{{item}}</router-link>
           </li>
-        </ul>
+        </ul>-->
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import DropDownMenu from './DropDownMenu.vue'
 export default {
   name: 'app-header',
+  components: {
+    'app-dropDownMenu': DropDownMenu
+  },
   data () {
     return {
       a: 'testData sandylee',

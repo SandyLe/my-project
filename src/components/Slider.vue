@@ -91,8 +91,8 @@ export default {
     },
     move (offset, direction, speed) {
       console.log(speed)
-      if(offset===1024){
-        offset = this.imgWidth;
+      if (offset === 1024) {
+        offset = this.imgWidth
       }
       if (!this.transitionEnd) return
       this.transitionEnd = false
@@ -121,9 +121,9 @@ export default {
       }, 20)
     },
     jump (index) {
-      const direction = index - this.currentIndex >= 0 ? -1 : 1;
-      const offset = Math.abs(index - this.currentIndex) * this.imgWidth;
-      const jumpSpeed = Math.abs(index - this.currentIndex) === 0 ? this.speed : Math.abs(index - this.currentIndex) * this.speed ;
+      const direction = index - this.currentIndex >= 0 ? -1 : 1
+      const offset = Math.abs(index - this.currentIndex) * this.imgWidth
+      const jumpSpeed = Math.abs(index - this.currentIndex) === 0 ? this.speed : Math.abs(index - this.currentIndex) * this.speed
       this.move(offset, direction, jumpSpeed)
     },
     play () {

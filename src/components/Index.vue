@@ -5,13 +5,13 @@
 </template>
 
 <script>
-    import Slider from './Slider.vue';
-    export default {
-      name: "index",
-      components: {
-        'app-slider': Slider
-      }
-    }
+import Slider from './Slider.vue'
+export default {
+  name: 'index',
+  components: {
+    'app-slider': Slider
+  }
+}
 </script>
 
 <style scoped>
