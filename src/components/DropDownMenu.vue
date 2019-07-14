@@ -79,7 +79,7 @@ export default {
     text-align: center;
     line-height: 1.5;
     background-color: rgba(255,255,255,0.2);
-    border: 1px solid #e9ecef;
+    /**border: 1px solid #e9ecef;**/
     cursor: pointer;
     outline: none;
     -webkit-user-select: none;
