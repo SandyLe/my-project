@@ -13,10 +13,10 @@
         </li>
       </ul>
       <ul class="direction">
-        <li class="left" @click="move(600, 1, speed)">
+        <li class="left" @click="move(1024, 1, speed)">
           <svg class="icon" width="30px" height="30.00px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M481.233 904c8.189 0 16.379-3.124 22.628-9.372 12.496-12.497 12.496-32.759 0-45.256L166.488 512l337.373-337.373c12.496-12.497 12.496-32.758 0-45.255-12.498-12.497-32.758-12.497-45.256 0l-360 360c-12.496 12.497-12.496 32.758 0 45.255l360 360c6.249 6.249 14.439 9.373 22.628 9.373z"  /></svg>
         </li>
-        <li class="right" @click="move(600, -1, speed)">
+        <li class="right" @click="move(1024, -1, speed)">
           <svg class="icon" width="30px" height="30.00px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M557.179 904c-8.189 0-16.379-3.124-22.628-9.372-12.496-12.497-12.496-32.759 0-45.256L871.924 512 534.551 174.627c-12.496-12.497-12.496-32.758 0-45.255 12.498-12.497 32.758-12.497 45.256 0l360 360c12.496 12.497 12.496 32.758 0 45.255l-360 360c-6.249 6.249-14.439 9.373-22.628 9.373z"  /></svg>
         </li>
       </ul>
@@ -63,9 +63,9 @@ export default {
           img: 'http://img.hb.aicdn.com/22ded455284aab361b8d2056e82f74a891a019704296a-PSraEB_fw658'
         }
       ],
-      imgWidth: 600,
+      imgWidth: document.body.clientWidth,
       currentIndex: 1,
-      distance: -600,
+      distance: -1 * document.body.clientWidth,
       transitionEnd: true,
       speed: this.initialSpeed
     }
@@ -91,9 +91,12 @@ export default {
     },
     move (offset, direction, speed) {
       console.log(speed)
+      if(offset===1024){
+        offset = this.imgWidth;
+      }
       if (!this.transitionEnd) return
       this.transitionEnd = false
-      direction === -1 ? this.currentIndex += offset / 600 : this.currentIndex -= offset / 600
+      direction === -1 ? this.currentIndex += offset / this.imgWidth : this.currentIndex -= offset / this.imgWidth
       if (this.currentIndex > 5) this.currentIndex = 1
       if (this.currentIndex < 1) this.currentIndex = 5
 
@@ -112,14 +115,14 @@ export default {
           this.transitionEnd = true
           window.clearInterval(this.temp)
           this.distance = des
-          if (des < -3000) this.distance = -600
-          if (des > -600) this.distance = -3000
+          if (des < -5 * this.imgWidth) this.distance = -1 * this.imgWidth
+          if (des > -1 * this.imgWidth) this.distance = -5 * this.imgWidth
         }
       }, 20)
     },
     jump (index) {
       const direction = index - this.currentIndex >= 0 ? -1 : 1;
-      const offset = Math.abs(index - this.currentIndex) * 600;
+      const offset = Math.abs(index - this.currentIndex) * this.imgWidth;
       const jumpSpeed = Math.abs(index - this.currentIndex) === 0 ? this.speed : Math.abs(index - this.currentIndex) * this.speed ;
       this.move(offset, direction, jumpSpeed)
     },
@@ -129,7 +132,7 @@ export default {
         this.timer = null
       }
       this.timer = window.setInterval(() => {
-        this.move(600, -1, this.speed)
+        this.move(this.imgWidth, -1, this.speed)
       }, this.interval)
     },
     stop () {
@@ -154,7 +157,8 @@ export default {
   }
   .window{
     position:relative;
-    width:600px;
+    width:100%;
+    /**width:600px;**/
     height:400px;
     margin:0 auto;
     overflow:hidden;
