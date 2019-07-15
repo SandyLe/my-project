@@ -1,5 +1,5 @@
 <template>
-  <div id="menu">
+  <div id="menu" class = "menuClass">
     <ul class="btn-list-group">
       <li v-for="(item,index) in menuData" :key="index" style="width:100px; float:left; padding-top: 45px;">
         <router-link to="/">{{item}}</router-link>
@@ -13,29 +13,6 @@
         </ul>
       </li>
     </ul>
-    <span class="btn-list-group">
-  <a class="btn">悬停</a>
-  <span class="btn-list-area">
-    <a class="btn">新建</a>
-    <a class="btn">编辑</a>
-    <a class="btn">打开</a>
-    <a class="btn">导出</a>
-    <a class="btn">导入</a>
-    <a class="btn">退出</a>
-  </span>
-  </span>
-    <span class="btn-list-group">
-  <a class="btn">悬停</a>
-  <span class="btn-list-area">
-    <a class="btn">新建</a>
-    <a class="btn">编辑</a>
-    <a class="btn">打开</a>
-    <a class="btn">导出</a>
-    <a class="btn">导入</a>
-    <a class="btn">退出</a>
-  </span>
-  </span>
-
   </div>
 </template>
 
@@ -52,6 +29,13 @@ export default {
 </script>
 
 <style scoped>
+  .menuClass {
+    display: inline-block;
+  }
+  .menuClass a {
+    text-decoration: none;
+  }
+
   .btn-list-group {
     position: relative;
     list-style-type:none;
