@@ -1,7 +1,7 @@
 <template>
   <div id="menu" class = "menuClass">
     <ul class="btn-list-group">
-      <li v-for="(item,index) in menuData" :key="index" style="width:100px; float:left; padding-top: 45px;">
+      <li v-for="(item,index) in menuData" :key="index" style="width:100px; float:left; padding-top: 45px;text-align:center">
         <router-link to="/">{{item}}</router-link>
         <ul class="btn-list-area">
           <li class="btn">新建</li>
@@ -17,15 +17,15 @@
 </template>
 
 <script>
-export default {
-  name: 'dropDownMenu',
-  data () {
-    return {
-      activeIndex: 0,
-      menuData: ['首页', '品牌', '公司简介', '新闻与观点', '电商店铺', '联系我们']
+  export default {
+    name: 'dropDownMenu',
+    data () {
+      return {
+        activeIndex: 0,
+        menuData: ['首页', '品牌', '公司简介', '新闻与观点', '电商店铺', '联系我们']
+      }
     }
   }
-}
 </script>
 
 <style scoped>
@@ -36,18 +36,18 @@ export default {
     text-decoration: none;
   }
 
-  .btn-list-group {
+  .btn-list-group>li{
     position: relative;
     list-style-type:none;
   }
   .btn-list-area {
     display: none;
     position: absolute;
-    left: 0;
+
     right: 0;
     z-index: 999;
   }
-  .btn-list-group:hover .btn-list-area {
+  .btn-list-group li:hover .btn-list-area {
     display: block;
   }
   .btn-list-area li {
