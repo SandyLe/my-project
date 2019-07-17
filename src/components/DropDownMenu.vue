@@ -17,15 +17,15 @@
 </template>
 
 <script>
-  export default {
-    name: 'dropDownMenu',
-    data () {
-      return {
-        activeIndex: 0,
-        menuData: ['首页', '品牌', '公司简介', '新闻与观点', '电商店铺', '联系我们']
-      }
+export default {
+  name: 'dropDownMenu',
+  data () {
+    return {
+      activeIndex: 0,
+      menuData: ['首页', '品牌', '公司简介', '新闻与观点', '电商店铺', '联系我们']
     }
   }
+}
 </script>
 
 <style scoped>
