@@ -48,10 +48,10 @@ export default {
     return {
       sliders: [
         {
-          img: 'http://img.hb.aicdn.com/adbde61e4343dedd21e97ea7f22666825a8db7d077ffe-qn8Pjn_fw658'
+          img: '../static/mainVis01.jpg'
         },
         {
-          img: 'http://img.hb.aicdn.com/adeed7d28df6e776c2fa6032579c697381d1a82b7fe00-fwRqgn_fw658'
+          img: '../static/mainVis02.jpg'
         },
         {
           img: 'http://img.hb.aicdn.com/ab7f48509b3c0353017d9a85ef1d12400c9b2724540d4-p3zouo_fw658'
@@ -159,7 +159,7 @@ export default {
     position:relative;
     width:100%;
     /**width:600px;**/
-    height:400px;
+    height:500px;
     margin:0 auto;
     overflow:hidden;
   }
