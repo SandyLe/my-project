@@ -51,16 +51,16 @@ export default {
           img: '../static/mainVis01.jpg'
         },
         {
+          img: '../static/index01.jpeg'
+        },
+        {
+          img: '../static/index02.jpeg'
+        },
+        {
+          img: '../static/index03.jpeg'
+        },
+        {
           img: '../static/mainVis02.jpg'
-        },
-        {
-          img: 'http://img.hb.aicdn.com/ab7f48509b3c0353017d9a85ef1d12400c9b2724540d4-p3zouo_fw658'
-        },
-        {
-          img: 'http://img.hb.aicdn.com/60f788fc2a846192f224b9e6d4904b30e54926211d3d67-ACFJ9G_fw658'
-        },
-        {
-          img: 'http://img.hb.aicdn.com/22ded455284aab361b8d2056e82f74a891a019704296a-PSraEB_fw658'
         }
       ],
       imgWidth: document.body.clientWidth,
