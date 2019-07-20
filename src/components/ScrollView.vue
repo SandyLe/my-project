@@ -18,7 +18,7 @@
 </template>
 <script>
 export default {
-  name: 'ErCarouselIndex',
+  name: 'ScrollView',
   data () {
     return {
       imgList: [],
@@ -51,114 +51,112 @@ export default {
     index: {
       handler () {
         var _this = this
-        if(Math.abs(this.index) ===  this.imgList.length){
-          this.indexCircle = s0
+        if (Math.abs(this.index) === this.imgList.length) {
+          this.indexCircle = 0
           setTimeout(function () {
             _this.reset()
-          },_this.duration * 1000 * 0.98)
-        }else{
-          this.indexCircle=this.index;
+          }, _this.duration * 1000 * 0.98)
+        } else {
+          this.indexCircle = this.index
         }
-        this.calcXnum();
+        this.calcXnum()
       }
     },
-    translateXnum:{
-      handler(){
-        this.translateX="translateX("+this.translateXnum+"%)";
+    translateXnum: {
+      handler () {
+        this.translateX = 'translateX(' + this.translateXnum + '%)'
       }
     }
   },
-  methods:{
-    //页面初始化复赋值
-    imgView:function() {
-      var _this = this;
+  methods: {
+    // 页面初始化复赋值
+    imgView: function () {
+      var _this = this
       _this.$http.get(_this.url).then(function (res) {
-        _this.imgList = res.data.imgList;
-        for(var i=0;i<3;i++){
+        _this.imgList = res.data.imgList
+        for (var i = 0; i < 3; i++) {
           _this.imgList.forEach(function (item, index) {
-            _this.imgLisShow.push(item);
-
-          });
+            _this.imgLisShow.push(item)
+          })
         }
-        _this.reset();
-        _this.slideAuto();
-        _this.imgWidth=(100/_this.pageNumber)-1;
-        _this.transitionTime="all "+_this.duration*0.98+"s linear";
-        console.log(_this.transitionTime);
-      });
+        _this.reset()
+        _this.slideAuto()
+        _this.imgWidth = (100 / _this.pageNumber) - 1
+        _this.transitionTime = 'all ' + _this.duration * 0.98 + 's linear'
+        console.log(_this.transitionTime)
+      })
     },
-    //图片滚动方法(长按)
-    imgMove:function(direct){
-      var _this = this;
-      _this.timeDown=new Date();//记录按下的时间
-      _this.timeout = setInterval(function() {
-        if(direct=="mouseLeft") {
-          _this.leftMove();
-        }else{
-          _this.rightMove();
+    // 图片滚动方法(长按)
+    imgMove: function (direct) {
+      var _this = this
+      _this.timeDown = new Date()// 记录按下的时间
+      _this.timeout = setInterval(function () {
+        if (direct === 'mouseLeft') {
+          _this.leftMove()
+        } else {
+          _this.rightMove()
         }
-      },300);
+      }, 300)
     },
-    cancelMove:function(direct){
-      var _this = this;
-      _this.clearAuto();
-      this.timeup=new Date();//记录松开的时间
-      this.clickSpace=this.timeup.getTime() - this.timeDown.getTime();
-      //时间间隔小于500毫秒为点击，反之为长按
-      if(this.clickSpace<500){
-        for(var i=0;i<_this.typeNumber;i++){
-          if(direct=="left"){
-            _this.leftMove();
-          }else{
-            _this.rightMove();
+    cancelMove: function (direct) {
+      var _this = this
+      _this.clearAuto()
+      this.timeup = new Date()// 记录松开的时间
+      this.clickSpace = this.timeup.getTime() - this.timeDown.getTime()
+      // 时间间隔小于500毫秒为点击，反之为长按
+      if (this.clickSpace < 500) {
+        for (var i = 0; i < _this.typeNumber; i++) {
+          if (direct === 'left') {
+            _this.leftMove()
+          } else {
+            _this.rightMove()
           }
         }
       }
       if (this.timeout) {
-        clearInterval(this.timeout);
-        this.timeout = null;
+        clearInterval(this.timeout)
+        this.timeout = null
       }
     },
-    //向左移动
-    leftMove:function(){
-      this.index--;
-      this.transFlag=true;
+    // 向左移动
+    leftMove: function () {
+      this.index--
+      this.transFlag = true
     },
-    //向右移动
-    rightMove:function(){
-      this.transFlag=true;
-      this.index++;
+    // 向右移动
+    rightMove: function () {
+      this.transFlag = true
+      this.index++
     },
-    slideAuto:function () {
-      var _this = this;
+    slideAuto: function () {
+      var _this = this
       _this.timer = setTimeout(function () {
-        if(Math.abs(_this.index)!==_this.imgList.length){
-          _this.rightMove();
-          _this.slideAuto();
+        if (Math.abs(_this.index) !== _this.imgList.length) {
+          _this.rightMove()
+          _this.slideAuto()
         }
-      }, _this.timeSpace * 1000);
+      }, _this.timeSpace * 1000)
     },
-    clearAuto:function () {
-      console.log("停止");
+    clearAuto: function () {
       if (this.timer) {
-        clearInterval(this.timer);
-        this.timer = null;
+        clearInterval(this.timer)
+        this.timer = null
       }
     },
-    //重置
-    reset:function(){
-      this.index=0;
-      this.transFlag=false;
-      this.calcXnum();
+    // 重置
+    reset: function () {
+      this.index = 0
+      this.transFlag = false
+      this.calcXnum()
     },
-    calcXnum:function(){
-      var _this=this;
-      this.translateXnum=-(this.index+this.imgList.length)*(100/this.pageNumber);
+    calcXnum: function () {
+      // var _this = this
+      this.translateXnum = -(this.index + this.imgList.length) * (100 / this.pageNumber)
     },
-    //点击圆圈跳转图片
-    circleClick:function(dex){
-      this.index=dex;
-      this.clearAuto();
+    // 点击圆圈跳转图片
+    circleClick: function (dex) {
+      this.index = dex
+      this.clearAuto()
     }
   },
   mounted () {

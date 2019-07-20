@@ -12,7 +12,7 @@
 <script>
 import Slider from './Slider.vue'
 import IndexProducts from './IndexProducts'
-import ScrollView from './ScrollView'
+import ScrollView from './SV01'
 export default {
   name: 'index',
   components: {

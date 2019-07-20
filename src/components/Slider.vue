@@ -154,6 +154,7 @@ export default {
   }
   #slider{
     text-align: center;
+    position: relative;
   }
   .window{
     position:relative;
