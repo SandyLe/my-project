@@ -2,7 +2,7 @@
     <div id = "index">
       <app-slider></app-slider>
       <div>
-        <img src="../assets/energe.jpg" style="width: 100%;"/>
+        <img src="../assets/hf.jpg" style="width: 100%;"/>
       </div>
       <app-products></app-products>
       <app-scrollview></app-scrollview>
@@ -12,7 +12,7 @@
 <script>
 import Slider from './Slider.vue'
 import IndexProducts from './IndexProducts'
-import ScrollView from './ScrollView'
+import ScrollView from './SV01'
 export default {
   name: 'index',
   components: {

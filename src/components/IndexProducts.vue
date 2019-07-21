@@ -8,7 +8,6 @@
       <li><img src="../../static/pro2.jpg"/></li>
       <li><img src="../../static/pro3.jpg"/></li>
     </ul>
-    HIJIJIJIJIJIJIJIJIJIJIJIJIJIJIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIJIJIJIJIJIJIJIJIJJI
   </div>
 </template>
 
@@ -20,7 +19,10 @@ export default {
 
 <style scoped>
 #indexProducts{
+  border: #2c3e50;
   width: 90%;
+  position: relative;
+  height: 900px;
   margin: 0 auto;
 }
 #indexProducts ul{
