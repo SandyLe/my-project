@@ -1,5 +1,5 @@
 <template>
-  <div id="app-header" style="margin-top: 0;border-bottom: 1px solid rebeccapurple; height: 114px;">
+  <div id="app-header" style="margin-top: 0;border-bottom: 1px solid #E3E7EA; height: 114px;">
     <div style="width: 90%; margin:0 auto 0 auto">
       <div style="width: 200px; float:left;margin-top: 32px;">
         <div style="width: 50px;float:left;"><img src="../assets/wjlogo.jpg" style="width: 50px"/></div>
