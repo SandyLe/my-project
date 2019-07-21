@@ -9,12 +9,12 @@
               </div>
               <div class="foot-nav-block">
                 <ul>
-                  <li>新建</li>
-                  <li>编辑</li>
-                  <li>打开</li>
-                  <li>导出</li>
-                  <li>导入</li>
-                  <li>退出</li>
+                  <li><a href="#">二级导航</a></li>
+                  <li><a href="#">二级导航</a></li>
+                  <li><a href="#">二级导航</a></li>
+                  <li><a href="#">二级导航</a></li>
+                  <li><a href="#">二级导航</a></li>
+                  <li><a href="#">二级导航</a></li>
                 </ul>
               </div>
             </li>
@@ -76,5 +76,9 @@ export default {
   text-align: center;
   font-size: 10px;
   margin-top: 20px;
+}
+
+.foot-nav-block ul li a {
+  text-decoration: none;
 }
 </style>

@@ -4,12 +4,12 @@
       <li v-for="(item,index) in menuData" :key="index" style="width:100px; float:left; padding-top: 45px;text-align:center">
         <router-link to="/">{{item}}</router-link>
         <ul class="btn-list-area">
-          <li class="btn">新建</li>
-          <li class="btn">编辑</li>
-          <li class="btn">打开</li>
-          <li class="btn">导出</li>
-          <li class="btn">导入</li>
-          <li class="btn">退出</li>
+          <li class="btn"><a href="#">二级导航</a></li>
+          <li class="btn"><a href="#">二级导航</a></li>
+          <li class="btn"><a href="#">二级导航</a></li>
+          <li class="btn"><a href="#">二级导航</a></li>
+          <li class="btn"><a href="#">二级导航</a></li>
+          <li class="btn"><a href="#">二级导航</a></li>
         </ul>
       </li>
     </ul>
