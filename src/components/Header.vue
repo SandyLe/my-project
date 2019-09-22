@@ -23,6 +23,8 @@
 
 <script>
 import DropDownMenu from './DropDownMenu.vue'
+import {getTestData} from './../api/data'
+
 export default {
   name: 'app-header',
   components: {
@@ -33,6 +35,11 @@ export default {
       a: 'testData sandylee',
       navData: ['首页', '品牌', '公司简介', '新闻与观点', '电商店铺', '联系我们']
     }
+  },
+  mounted () {
+    getTestData().then(res => {
+      console.log(res.data.data)
+    })
   }
 }
 </script>

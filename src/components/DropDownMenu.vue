@@ -2,14 +2,14 @@
   <div id="menu" class = "menuClass">
     <ul class="btn-list-group">
       <li v-for="(item,index) in menuData" :key="index" style="width:100px; float:left; padding-top: 45px;text-align:center">
-        <router-link to="/">{{item}}</router-link>
+        <router-link to="/">{{item.name}}</router-link>
         <ul class="btn-list-area">
-          <li class="btn"><a href="#">二级导航</a></li>
-          <li class="btn"><a href="#">二级导航</a></li>
-          <li class="btn"><a href="#">二级导航</a></li>
-          <li class="btn"><a href="#">二级导航</a></li>
-          <li class="btn"><a href="#">二级导航</a></li>
-          <li class="btn"><a href="#">二级导航</a></li>
+          <li class="btn" v-for="(item1,index1) in item.children" :key="index1" >
+            <router-link to="/">{{item1.name}}</router-link>
+            <ul class="btn-list-area1">
+              <li class="btn" v-for="(item2,index2) in item1.children" :key="index2" ><a href="#">{{item2.name}}</a></li>
+            </ul>
+          </li>
         </ul>
       </li>
     </ul>
@@ -17,6 +17,9 @@
 </template>
 
 <script>
+
+import {getMenuLevelFirst} from './../api/data'
+
 export default {
   name: 'dropDownMenu',
   data () {
@@ -24,6 +27,11 @@ export default {
       activeIndex: 0,
       menuData: ['首页', '品牌', '公司简介', '新闻与观点', '电商店铺', '联系我们']
     }
+  },
+  mounted () {
+    getMenuLevelFirst().then(res => {
+      this.menuData = res.data.data
+    })
   }
 }
 </script>
@@ -46,6 +54,17 @@ export default {
 
     right: 0;
     z-index: 999;
+  }
+  .btn-list-area1 {
+    display: none;
+    position: absolute;
+    margin-left: 20px;
+    margin-top: -20px;
+    /*right: 0;*/
+    z-index: 999;
+  }
+  .btn-list-area li:hover .btn-list-area1 {
+    display: block;
   }
   .btn-list-group li:hover .btn-list-area {
     display: block;
