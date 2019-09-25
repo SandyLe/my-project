@@ -2,7 +2,8 @@
   <div id="menu" class = "menuClass">
     <ul class="btn-list-group">
       <li v-for="(item,index) in menuData" :key="index" style="width:100px; float:left; padding-top: 45px;text-align:center">
-        <router-link to="/">{{item.name}}</router-link>
+        <span v-if="item.isOutSite"><router-link :to="item.url">{{item.name}}</router-link></span>
+        <span v-else><a :href="item.url" target="_blank">{{item.name}}</a></span>
         <ul class="btn-list-area">
           <li class="btn" v-for="(item1,index1) in item.children" :key="index1" >
             <router-link to="/">{{item1.name}}</router-link>
@@ -27,6 +28,8 @@ export default {
       activeIndex: 0,
       menuData: ['首页', '品牌', '公司简介', '新闻与观点', '电商店铺', '联系我们']
     }
+  },
+  methods () {
   },
   mounted () {
     getMenuLevelFirst().then(res => {
