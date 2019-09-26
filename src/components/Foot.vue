@@ -5,16 +5,21 @@
           <ul>
             <li v-for="(item,index) in menuData" :key="index">
               <div style="text-align: center; padding-bottom: 20px">
-                <router-link to="/">{{item}}</router-link>
+                <span v-if="item.isOutSite"><a href="javascript:void(0)" @click="openOutSite(item)" target="_blank">{{item.name}}</a></span>
+                <span v-else><router-link :to="item.url">{{item.name}}</router-link></span>
               </div>
               <div class="foot-nav-block">
-                <ul>
-                  <li><a href="#">二级导航</a></li>
-                  <li><a href="#">二级导航</a></li>
-                  <li><a href="#">二级导航</a></li>
-                  <li><a href="#">二级导航</a></li>
-                  <li><a href="#">二级导航</a></li>
-                  <li><a href="#">二级导航</a></li>
+                <ul class="btn-list-area">
+                  <li class="btn" v-for="(item1,index1) in item.children" :key="index1" >
+                    <span v-if="item1.isOutSite"><a href="javascript:void(0)" @click="openOutSite(item1)" target="_blank">{{item1.name}}</a></span>
+                    <span v-else><router-link :to="item1.url">{{item1.name}}</router-link></span>
+                    <ul class="btn-list-area1">
+                      <li class="btn" v-for="(item2,index2) in item1.children" :key="index2" >
+                        <span v-if="item2.isOutSite"><a href="javascript:void(0)" @click="openOutSite(item2)" target="_blank">{{item2.name}}</a></span>
+                        <span v-else><a href="#">{{item2.name}}</a></span>
+                      </li>
+                    </ul>
+                  </li>
                 </ul>
               </div>
             </li>
@@ -30,12 +35,24 @@
 </template>
 
 <script>
+import {getMenuLevelFirst} from './../api/data'
 export default {
   name: 'foot',
   data () {
     return {
       menuData: ['首页', '品牌', '公司简介', '新闻与观点', '电商店铺', '联系我们']
     }
+  },
+  methods: {
+    openOutSite (item) {
+      var tempwindow = window.open('_blank') // 先打开页面
+      tempwindow.location = item.url // 后更改页面地址
+    }
+  },
+  mounted () {
+    getMenuLevelFirst().then(res => {
+      this.menuData = res.data.data
+    })
   }
 }
 </script>

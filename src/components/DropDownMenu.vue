@@ -2,13 +2,17 @@
   <div id="menu" class = "menuClass">
     <ul class="btn-list-group">
       <li v-for="(item,index) in menuData" :key="index" style="width:100px; float:left; padding-top: 45px;text-align:center">
-        <span v-if="item.isOutSite"><router-link :to="item.url">{{item.name}}</router-link></span>
-        <span v-else><a :href="item.url" target="_blank">{{item.name}}</a></span>
+        <span v-if="item.isOutSite"><a href="javascript:void(0)" @click="openOutSite(item)" target="_blank">{{item.name}}</a></span>
+        <span v-else><router-link :to="item.url">{{item.name}}</router-link></span>
         <ul class="btn-list-area">
           <li class="btn" v-for="(item1,index1) in item.children" :key="index1" >
-            <router-link to="/">{{item1.name}}</router-link>
+            <span v-if="item1.isOutSite"><a href="javascript:void(0)" @click="openOutSite(item1)" target="_blank">{{item1.name}}</a></span>
+            <span v-else><router-link :to="item1.url">{{item1.name}}</router-link></span>
             <ul class="btn-list-area1">
-              <li class="btn" v-for="(item2,index2) in item1.children" :key="index2" ><a href="#">{{item2.name}}</a></li>
+              <li class="btn" v-for="(item2,index2) in item1.children" :key="index2" >
+                <span v-if="item2.isOutSite"><a href="javascript:void(0)" @click="openOutSite(item2)" target="_blank">{{item2.name}}</a></span>
+                <span v-else><a href="#">{{item2.name}}</a></span>
+              </li>
             </ul>
           </li>
         </ul>
@@ -29,7 +33,11 @@ export default {
       menuData: ['首页', '品牌', '公司简介', '新闻与观点', '电商店铺', '联系我们']
     }
   },
-  methods () {
+  methods: {
+    openOutSite (item) {
+      var tempwindow = window.open('_blank') // 先打开页面
+      tempwindow.location = item.url // 后更改页面地址
+    }
   },
   mounted () {
     getMenuLevelFirst().then(res => {

@@ -48,7 +48,7 @@ export default {
     return {
       sliders: [
         {
-          img: '../static/mainVis01.jpg'
+          img: '../upload/TUPIANLUNBO\\1568074328714-1812559396.jpg'
         },
         {
           img: '../static/index01.jpeg'
