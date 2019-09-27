@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import {getSlidePics} from './../api/data'
+
 export default {
   name: 'slider',
   props: {
@@ -81,6 +83,10 @@ export default {
     }
   },
   mounted () {
+    getSlidePics().then(res => {
+      console.log(process.env.NODE_ENV)
+      console.log(res.data.data)
+    })
     this.init()
   },
   methods: {

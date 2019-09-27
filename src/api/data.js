@@ -16,6 +16,17 @@ const getTestData = function () {
   })
 }
 
+const getSlidePics = function (albumCode) {
+  return axios.request({
+    // url: 'http://www.noohle.com/api/cloud/fc/basic/platformMaterial/getPage',
+    url: '/fc/pic/getList',
+    params: {
+      albumCode: albumCode
+    },
+    method: 'get'
+  })
+}
+
 const getMenuLevelFirst = function () {
   return axios.request({
     // url: 'http://www.noohle.com/api/cloud/fc/basic/platformMaterial/getPage',
@@ -26,4 +37,4 @@ const getMenuLevelFirst = function () {
   })
 }
 
-export { getTestData, getMenuLevelFirst }
+export { getTestData, getMenuLevelFirst, getSlidePics }
