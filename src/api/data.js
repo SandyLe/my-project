@@ -16,12 +16,13 @@ const getTestData = function () {
   })
 }
 
-const getSlidePics = function (albumCode) {
+const getSlidePics = function (albumCode, limit) {
   return axios.request({
     // url: 'http://www.noohle.com/api/cloud/fc/basic/platformMaterial/getPage',
     url: '/fc/pic/getList',
     params: {
-      albumCode: albumCode
+      albumCode: albumCode,
+      limit: limit
     },
     method: 'get'
   })

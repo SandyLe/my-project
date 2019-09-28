@@ -33,6 +33,8 @@
 
 <script>
 import {getSlidePics} from './../api/data'
+import config from '../../config'
+const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
 
 export default {
   name: 'slider',
@@ -50,7 +52,7 @@ export default {
     return {
       sliders: [
         {
-          img: '../upload/TUPIANLUNBO\\1568074328714-1812559396.jpg'
+          img: baseUrl + '/upload/LUNBOTUCE/1567953545289455973029.jpeg'
         },
         {
           img: '../static/index01.jpeg'
@@ -83,9 +85,13 @@ export default {
     }
   },
   mounted () {
-    getSlidePics().then(res => {
-      console.log(process.env.NODE_ENV)
-      console.log(res.data.data)
+    getSlidePics('LUNBOTUCE', 5).then(res => {
+      var datas = res.data.data
+      var imgs = new Array({})
+      datas.forEach(function (e) {
+        imgs[imgs.length] = {'img': baseUrl + e}
+      })
+      this.sliders = imgs
     })
     this.init()
   },
