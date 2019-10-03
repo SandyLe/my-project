@@ -34,7 +34,6 @@ export default {
       var datas = res.data.data
       this.img = baseUrl + datas[0]
     })
-    this.init()
   }
 }
 </script>

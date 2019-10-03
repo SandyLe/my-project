@@ -21,6 +21,9 @@
   </div>
 </template>
 <script>
+import {getSlidePics} from './../api/data'
+import config from '../../config'
+const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
 export default {
   name: 'BaseSwiper',
   props: {
@@ -30,54 +33,6 @@ export default {
   data () {
     return {
       superurl: [
-        {
-          url: '',
-          img: '../../static/bs00.jpg'
-        },
-        {
-          url: '',
-          img: '../../static/bs01.jpg'
-        },
-        {
-          url: '',
-          img: '../../static/bs02.jpg'
-        },
-        {
-          url: '',
-          img: '../../static/bs03.jpg'
-        },
-        {
-          url: '',
-          img: '../../static/bs04.jpg'
-        },
-        {
-          url: '',
-          img: '../../static/bs05.jpg'
-        },
-        {
-          url: '',
-          img: '../../static/bs06.jpg'
-        },
-        {
-          url: '',
-          img: '../../static/pro0.jpg'
-        },
-        {
-          url: '',
-          img: '../../static/pro1.jpg'
-        },
-        {
-          url: '',
-          img: '../../static/pro2.jpg'
-        },
-        {
-          url: '',
-          img: '../../static/pro3.jpg'
-        },
-        {
-          url: '',
-          img: '../../static/pro4.jpg'
-        }
       ],
       calleft: 0
     }
@@ -115,6 +70,17 @@ export default {
         this.calleft = -1020
       }
     }
+  },
+  mounted () {
+    getSlidePics('QYFC', 5).then(res => {
+      var datas = res.data.data
+      var imgs = new Array(datas.length)
+      for (var i = 0; i < datas.length; i++) {
+        imgs[i] = {'img': baseUrl + datas[i]}
+      }
+      this.superurl = imgs
+      console.log(this.superurl)
+    })
   }
 }
 </script>

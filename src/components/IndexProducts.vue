@@ -1,19 +1,39 @@
 <template>
   <div id="indexProducts">
     <ul>
-      <li><img src="../../static/pro1.jpg"/></li>
-      <li><img src="../../static/pro2.jpg"/></li>
-      <li><img src="../../static/pro3.jpg"/></li>
-      <li><img src="../../static/pro1.jpg"/></li>
-      <li><img src="../../static/pro2.jpg"/></li>
-      <li><img src="../../static/pro3.jpg"/></li>
+      <li v-for="(item, index) in hotproductList" :key="index"><img :src="item.imgUrl" @click="openOutSite(item)"/></li>
     </ul>
   </div>
 </template>
 
 <script>
+import { getHotProductList } from './../api/data'
+import config from '../../config'
+const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
+
 export default {
-  name: 'IndexProducts'
+  name: 'IndexProducts',
+  data () {
+    return {
+      hotproductList: []
+    }
+  },
+  methods: {
+    openOutSite (item) {
+      if (item.shopUrl) {
+        var tempwindow = window.open('_blank') // 先打开页面
+        tempwindow.location = item.shopUrl // 后更改页面地址
+      }
+    }
+  },
+  mounted () {
+    getHotProductList(6).then(res => {
+      this.hotproductList = res.data.data
+      this.hotproductList.forEach(function (e) {
+        e.imgUrl = baseUrl + e.imgUrl
+      })
+    })
+  }
 }
 </script>
 

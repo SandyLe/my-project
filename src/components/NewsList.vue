@@ -3,21 +3,19 @@
       <div>
         <img :src="img" style="width: 100%;"/>
       </div>
-      <div class="brandContent">
+      <div class="newsListNav">
+        您所在位置：
+      </div>
+      <div class="newsListContent">
         <ul>
           <li v-for="(item,index) in brandList" :key="index">
-            <div v-if="index % 2 === 0">
-              <div class="contentLeft">
-                <h4>{{item.name}}</h4>
-                <p>{{item.description}}</p>
+            <div>
+              <div class="contentUp">
+                <img :src="item.imgUrl" height="150px"/>
               </div>
-              <div class="contentRight"><img :src="item.imgUrl"/></div>
-            </div>
-            <div v-else>
-              <div class="contentLeft"><img :src="item.imgUrl"/></div>
-              <div class="contentRight">
+              <div class="contentDown">
                 <h4>{{item.name}}</h4>
-                <p>{{item.description}}</p>
+                <p>{{item.description}}<a href="/">...>>查看详情</a></p>
               </div>
             </div>
           </li>
@@ -47,9 +45,16 @@ export default {
       }]
     }
   },
+  methods: {
+    changepage () {}
+  },
   mounted () {
-    getSlidePics('CPPP', 1).then(res => {
+    var newsType = this.$route.params.code
+    getSlidePics(newsType, 1).then(res => {
       var datas = res.data.data
+      if (datas.length === 0) {
+        datas[0] = '/upload/CPPP/1570070012464-990185544.jpg'
+      }
       this.img = baseUrl + datas[0]
     })
     getBrandList().then(res => {
@@ -63,28 +68,41 @@ export default {
 </script>
 
 <style scoped>
-.brandContent{
+.newsListContent{
   width: 90%;
   margin: 0 auto;
+  overflow: auto;
 }
-.brandContent li {
+.newsListNav{
+  width: 90%;
+  margin: 0 auto;
+  font-size: 12px;
+  border-bottom: 1px solid #CDCDCD;
+}
+.newsListContent li {
+  width: 30%;
+  height: 400px;
+  float:left;
   list-style-type:none;
   overflow: auto;
-  border-top: 1px solid #CDCDCD;
+  padding: 1%
 }
-.brandContent li img{
+.newsListContent li img{
   margin-top: 10px;
  }
-.contentLeft{
-  margin: 0 auto;
-  width: 50%;
+.contentUp{
+  border: 1px solid #CDCDCD;
+  width: inherit;
+  height: inherit;
   text-align: center;
-  float: left;
+  padding:20px;
 }
-.contentRight{
-  width: 50%;
+.contentDown{
+  width: 100%;
   text-align: center;
   float: left;
+  height: 150px;
+  border: 1px dotted #CDCDCD;
 }
 .brandContent h4 {
   margin-top: 100px;

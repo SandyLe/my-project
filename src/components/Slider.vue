@@ -71,7 +71,8 @@ export default {
       currentIndex: 1,
       distance: -1 * document.body.clientWidth,
       transitionEnd: true,
-      speed: this.initialSpeed
+      speed: this.initialSpeed,
+      imgSize: 0
     }
   },
   computed: {
@@ -87,11 +88,12 @@ export default {
   mounted () {
     getSlidePics('LUNBOTUCE', 5).then(res => {
       var datas = res.data.data
-      var imgs = new Array({})
-      datas.forEach(function (e) {
-        imgs[imgs.length] = {'img': baseUrl + e}
-      })
+      var imgs = new Array(datas.length)
+      for (var i = 0; i < datas.length; i++) {
+        imgs[i] = {'img': baseUrl + datas[i]}
+      }
       this.sliders = imgs
+      this.imgSize = datas.length
     })
     this.init()
   },
@@ -109,8 +111,8 @@ export default {
       if (!this.transitionEnd) return
       this.transitionEnd = false
       direction === -1 ? this.currentIndex += offset / this.imgWidth : this.currentIndex -= offset / this.imgWidth
-      if (this.currentIndex > 5) this.currentIndex = 1
-      if (this.currentIndex < 1) this.currentIndex = 5
+      if (this.currentIndex > this.imgSize) this.currentIndex = 1
+      if (this.currentIndex < 1) this.currentIndex = this.imgSize
 
       const destination = this.distance + offset * direction
       this.animate(destination, direction, speed)
@@ -127,8 +129,8 @@ export default {
           this.transitionEnd = true
           window.clearInterval(this.temp)
           this.distance = des
-          if (des < -5 * this.imgWidth) this.distance = -1 * this.imgWidth
-          if (des > -1 * this.imgWidth) this.distance = -5 * this.imgWidth
+          if (des < -this.imgSize * this.imgWidth) this.distance = -1 * this.imgWidth
+          if (des > -1 * this.imgWidth) this.distance = -this.imgSize * this.imgWidth
         }
       }, 20)
     },

@@ -6,7 +6,7 @@ const path = require('path')
 
 module.exports = {
   baseUrl: {
-    dev: 'http://localhost:8081/demo/api/',
+    dev: 'http://localhost:8082/demo/api/',
     pro: 'https://produce.com'
   },
   dev: {
