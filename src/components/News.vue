@@ -7,74 +7,34 @@
         您所在位置：{{paths}}
       </div>
       <div class="newsListContent">
-        <ul>
-          <li v-for="(item,index) in newsData" :key="index">
-            <div>
-              <div class="contentUp">
-                <img :src="item.mainImgUrl" height="150px"/>
-              </div>
-              <div class="contentDown">
-                <h4>{{item.name}}</h4>
-                <span v-html="item.content ? item.content.substring(0, 100) : ''"></span>
-                <span><router-link :to="'/news/' + item.newsTypeCode + '/' + item.id">...>>查看详情</router-link></span>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="pageNumber">
-        <pageList v-bind:pageData="pageData" v-on:updatePageDate="updatePageDate"/>
+        <h3 style="text-align: center">{{ newsData.name }}</h3>
+        <p  style="text-align: center; font-size:10px">{{newsData.updateDate}}</p>
+        <div v-html="newsData.content"></div>
       </div>
     </div>
 </template>
 
 <script>
-import pageList from './PageList'
-import {getSlidePics, getPageData, getPath} from './../api/data'
+import formatTimeToStr from './../api/date'
+import {getSlidePics, getOneData, getPath} from './../api/data'
 import config from '../../config'
 const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
 export default {
-  name: 'brand',
+  name: 'news',
   data () {
     return {
-      pageData: {
-        identity: 'news',
-        pageSize: 6,
-        currentPage: 1,
-        totalPages: 1
-      },
       paths: '',
       img: baseUrl + '../assets/hf.jpg',
-      newsData: [{
-        name: '品牌名称',
-        description: 'ping pai 简介，介绍……',
-        imgUrl: baseUrl + '/upload/QYFC/1569998168630-35457943.jpg'
-      }, {
-        name: '品牌名称',
-        description: 'ping pai 简介，介绍……',
-        imgUrl: baseUrl + '/upload/QYFC/1569998168630-35457943.jpg'
-      }]
+      newsData: {}
     }
-  },
-  components: {
-    'pageList': pageList
   },
   methods: {
-    changepage () {},
-    updatePageDate (pageData) {
-      this.pageData = pageData
-      getPageData(this.pageData).then(res => {
-        this.newsData = res.data.data.data
-        delete res.data.data.data
-        // this.pageData = res.data.data
-      })
-    }
   },
   watch: {
     '$route' (to, from) {
-      if (this.$route.params.code) {
-        var newsType = this.$route.params.code
-        this.pageData.newsTypeCode = newsType
+      if (this.$route.params.newsTypeCode || this.$route.params.id) {
+        var newsType = this.$route.params.newsTypeCode
+        var id = this.$route.params.id
         getSlidePics(newsType, 1).then(res => {
           var datas = res.data.data
           if (datas.length === 0) {
@@ -92,17 +52,18 @@ export default {
           }
           this.paths = temp
         })
-        getPageData(this.pageData).then(res => {
-          this.newsData = res.data.data.data
-          delete res.data.data.data
-          this.pageData = JSON.parse(JSON.stringify(res.data.data))
+        getOneData('news', id).then(res => {
+          this.newsData = res.data.data
+          console.log(this.newsData.updateDate)
+          this.newsData.updateDate = formatTimeToStr(this.newsData.updateDate)
+          console.log(this.newsData.updateDate)
         })
       }
     }
   },
   mounted () {
-    var newsType = this.$route.params.code
-    this.pageData.newsTypeCode = newsType
+    var newsType = this.$route.params.newsTypeCode
+    var id = this.$route.params.id
     getSlidePics(newsType, 1).then(res => {
       var datas = res.data.data
       if (datas.length === 0) {
@@ -120,10 +81,11 @@ export default {
       }
       this.paths = temp
     })
-    getPageData(this.pageData).then(res => {
-      this.newsData = res.data.data.data
-      delete res.data.data.data
-      this.pageData = JSON.parse(JSON.stringify(res.data.data))
+    getOneData('news', id).then(res => {
+      this.newsData = res.data.data
+      console.log(this.newsData.updateDate)
+      this.newsData.updateDate = formatTimeToStr(this.newsData.updateDate)
+      console.log(this.newsData.updateDate)
     })
   }
 }
@@ -165,9 +127,6 @@ export default {
   float: left;
   height: 150px;
   border: 1px dotted #CDCDCD;
-}
-.contentDown span {
-  font-size: 12px;
 }
 .brandContent h4 {
   margin-top: 100px;

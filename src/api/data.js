@@ -53,4 +53,23 @@ const getBrandList = function () {
     method: 'get'
   })
 }
-export { getTestData, getMenuLevelFirst, getSlidePics, getHotProductList, getBrandList }
+const getPageData = function (pageData) {
+  return axios.request({
+    url: '/fc/' + pageData.identity + '/getPage',
+    method: 'get',
+    params: pageData
+  })
+}
+const getOneData = function (identity, id) {
+  return axios.request({
+    url: '/fc/' + identity + '/getOne?id=' + id,
+    method: 'get'
+  })
+}
+const getPath = function (newsType) {
+  return axios.request({
+    url: '/fc/menuNewsType/getPath?newsType=' + newsType,
+    method: 'get'
+  })
+}
+export { getTestData, getMenuLevelFirst, getSlidePics, getHotProductList, getBrandList, getPageData, getOneData, getPath }
