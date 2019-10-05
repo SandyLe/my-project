@@ -15,7 +15,7 @@
               </div>
               <div class="contentDown">
                 <h4>{{item.name}}</h4>
-                <span v-html="item.content ? item.content.substring(0, 100) : ''"></span>
+                <span v-html="item.content ? item.content.substring(0, 96) : ''"></span>
                 <span><router-link :to="'/news/' + item.newsTypeCode + '/' + item.id">...>>查看详情</router-link></span>
               </div>
             </div>
@@ -143,7 +143,7 @@ export default {
 }
 .newsListContent li {
   width: 30%;
-  height: 360px;
+  height: 370px;
   float:left;
   list-style-type:none;
   overflow: auto;
@@ -168,6 +168,8 @@ export default {
 }
 .contentDown span {
   font-size: 12px;
+  padding: 0;
+  margin: 0;
 }
 .brandContent h4 {
   margin-top: 100px;

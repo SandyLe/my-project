@@ -6,12 +6,12 @@
         <span v-else><router-link :to="item.url">{{item.name}}</router-link></span>
         <ul class="btn-list-area">
           <li class="btn" v-for="(item1,index1) in item.children" :key="index1" >
-            <span v-if="item1.isOutSite"><a href="javascript:void(0)" @click="openOutSite(item1)" target="_blank">{{item1.name}}</a></span>
-            <span v-else><router-link :to="item1.url">{{item1.name}}</router-link></span>
+            <span v-if="item1.isOutSite" style="text-align: center"><a href="javascript:void(0)" @click="openOutSite(item1)" target="_blank">{{item1.name}}</a></span>
+            <span v-else style="text-align: center"><router-link :to="item1.url">{{item1.name}}</router-link></span>
             <ul class="btn-list-area1">
               <li class="btn" v-for="(item2,index2) in item1.children" :key="index2" >
                 <span v-if="item2.isOutSite"><a href="javascript:void(0)" @click="openOutSite(item2)" target="_blank">{{item2.name}}</a></span>
-                <span v-else><a href="#">{{item2.name}}</a></span>
+                <span v-else><router-link :to="item2.url">{{item2.name}}</router-link></span>
               </li>
             </ul>
           </li>
@@ -69,16 +69,22 @@ export default {
   .btn-list-area1 {
     display: none;
     position: absolute;
-    margin-left: 20px;
+    margin-left: 80px;
     margin-top: -20px;
+    width: 70px;
+    float: right;
     /*right: 0;*/
     z-index: 999;
   }
   .btn-list-area li:hover .btn-list-area1 {
     display: block;
+    padding: 0;
+    color: #2c3e50;
   }
   .btn-list-group li:hover .btn-list-area {
     display: block;
+    padding: 0;
+    color: #2c3e50;
   }
   .btn-list-area li {
     width: 70px;
