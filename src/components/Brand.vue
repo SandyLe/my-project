@@ -50,12 +50,12 @@ export default {
   mounted () {
     getSlidePics('CPPP', 1).then(res => {
       var datas = res.data.data
-      this.img = baseUrl + datas[0]
+      this.img = datas[0]
     })
     getBrandList().then(res => {
       this.brandList = res.data.data
       this.brandList.forEach(function (e) {
-        e.imgUrl = baseUrl + e.imgUrl
+        e.imgUrl = e.imgUrl
       })
     })
   }

@@ -32,7 +32,7 @@ export default {
   mounted () {
     getSlidePics('LUNBOTUCE', 1).then(res => {
       var datas = res.data.data
-      this.img = baseUrl + datas[0]
+      this.img = datas[0]
     })
   }
 }

@@ -8,8 +8,8 @@
 
 <script>
 import { getHotProductList } from './../api/data'
-import config from '../../config'
-const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
+// import config from '../../config'
+// const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
 
 export default {
   name: 'IndexProducts',
@@ -30,7 +30,7 @@ export default {
     getHotProductList(6).then(res => {
       this.hotproductList = res.data.data
       this.hotproductList.forEach(function (e) {
-        e.imgUrl = baseUrl + e.imgUrl
+        e.imgUrl = e.imgUrl
       })
     })
   }

@@ -38,9 +38,9 @@ export default {
         getSlidePics(newsType, 1).then(res => {
           var datas = res.data.data
           if (datas.length === 0) {
-            datas[0] = '/upload/CPPP/1570070012464-990185544.jpg'
+            datas[0] = baseUrl + '/upload/CPPP/1570070012464-990185544.jpg'
           }
-          this.img = baseUrl + datas[0]
+          this.img = datas[0]
         })
         getPath(newsType).then(res => {
           var temp = ''
@@ -67,9 +67,9 @@ export default {
     getSlidePics(newsType, 1).then(res => {
       var datas = res.data.data
       if (datas.length === 0) {
-        datas[0] = '/upload/CPPP/1570070012464-990185544.jpg'
+        datas[0] = baseUrl + '/upload/CPPP/1570070012464-990185544.jpg'
       }
-      this.img = baseUrl + datas[0]
+      this.img = datas[0]
     })
     getPath(newsType).then(res => {
       var temp = ''

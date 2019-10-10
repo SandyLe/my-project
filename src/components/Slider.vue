@@ -90,7 +90,7 @@ export default {
       var datas = res.data.data
       var imgs = new Array(datas.length)
       for (var i = 0; i < datas.length; i++) {
-        imgs[i] = {'img': baseUrl + datas[i]}
+        imgs[i] = {'img': datas[i]}
       }
       this.sliders = imgs
       this.imgSize = datas.length

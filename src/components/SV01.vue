@@ -22,8 +22,8 @@
 </template>
 <script>
 import {getSlidePics} from './../api/data'
-import config from '../../config'
-const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
+// import config from '../../config'
+// const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
 export default {
   name: 'BaseSwiper',
   props: {
@@ -76,7 +76,7 @@ export default {
       var datas = res.data.data
       var imgs = new Array(datas.length)
       for (var i = 0; i < datas.length; i++) {
-        imgs[i] = {'img': baseUrl + datas[i]}
+        imgs[i] = {'img': datas[i]}
       }
       this.superurl = imgs
       console.log(this.superurl)
