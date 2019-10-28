@@ -80,6 +80,10 @@
         </a>
       </li>
     </ul>
+    <transition name="mybox">
+      <div class="box" v-show="boxshow"></div>
+    </transition>
+    <button @click="togglebox">按钮</button>
   </div>
 </template>
 
@@ -88,8 +92,17 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
+      boxshow: false,
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  methods: {
+    togglebox: function () {
+      this.boxshow = !this.boxshow
+    }
+  },
+  mounted () {
+    this.boxshow = true
   }
 }
 </script>
@@ -109,5 +122,19 @@ li {
 }
 a {
   color: #42b983;
+}
+.box{
+  height:500px;
+  background-color:black;
+  overflow: hidden;        }
+
+.mybox-leave-active,.mybox-enter-active{
+    transition: all 700ms ease;
+  }
+.mybox-leave-active,.mybox-enter{
+  height:0px !important;
+}
+.mybox-leave,.mybox-enter-active{
+  height: 500px;
 }
 </style>

@@ -4,6 +4,7 @@ import Index from '@/components/Index'
 import Brand from '@/components/Brand'
 import NewsList from '@/components/NewsList'
 import News from '@/components/News'
+import HelloWorld from '@/components/HelloWorld'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/news/:newsTypeCode/:id',
       name: 'News',
       component: News
+    },
+    {
+      path: '/helloWorld',
+      name: 'HelloWorld',
+      component: HelloWorld
     }
   ]
 })
