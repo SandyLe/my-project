@@ -30,7 +30,7 @@ export default {
     'app-scrollview': ScrollView
   },
   mounted () {
-    getSlidePics('LUNBOTUCE', 1).then(res => {
+    getSlidePics('HFGG', 1).then(res => {
       var datas = res.data.data
       this.img = datas[0]
     })

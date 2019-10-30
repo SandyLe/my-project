@@ -80,6 +80,8 @@
         </a>
       </li>
     </ul>
+    <iframe style="display: block; height: 600px; width: 700px;" src="../../static/address.html" width="300" height="150" frameborder="0"></iframe>
+
     <transition name="mybox">
       <div class="box" v-show="boxshow"></div>
     </transition>

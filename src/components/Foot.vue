@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="foot-auth">
-        <p style="width: 90%; margin: 0 auto; float: right"><img src="../assets/wjlogo.jpg" style="width: 50px; float: right"/>版权信息@上海文疆商贸·上海 备案号：2323232332  2019.07.01</p>
+        <p style="width: 90%; margin: 0 auto; float: right"><img src="../assets/wjlogo.jpg" style="width: 50px; float: right"/>版权信息@上海文疆商贸·上海 <a href="http://www.beian.miit.gov.cn">沪ICP备19038640号</a>  2019.10.30</p>
       </div>
     </div>
 </template>
