@@ -1,12 +1,12 @@
 <template>
   <div id="app-header" style="margin-top: 0;border-bottom: 1px solid #E3E7EA; height: 114px;">
     <div style="width: 90%; margin:0 auto 0 auto">
-      <div style="width: 200px; float:left;margin-top: 32px;">
+      <div style="width: 260px; float:left;margin-top: 32px;">
         <div style="width: 50px;float:left;"><img src="../assets/wjlogo.jpg" style="width: 50px"/></div>
-        <div style="width: 140px; float: left; font-family: '微软雅黑'; font-size: larger; font-weight: bolder; padding-left: 5px; color: #c40001">
-          文疆厨卫体验店
+        <div style="width: 200px; float: left; font-family: '微软雅黑'; font-size: larger; font-weight: bolder; padding-left: 5px; color: #c40001">
+          上海文疆商贸有限公司
           <br>
-          WENJIANG
+          <span style="font-size: 16px">WENJIANG TRADING</span>
         </div>
       </div>
       <div style="float: right;">
