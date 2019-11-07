@@ -59,7 +59,7 @@ export default {
 }
 #indexProducts ul li>img{
   width: 100%;
-  height: 400px;
+  height: 100%;
   border:1px solid darkgray;
   box-shadow: 2px 4px 5px darkgray;
   border-radius: 5px;

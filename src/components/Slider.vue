@@ -1,6 +1,6 @@
 <template>
   <div id="slider">
-    <div class="window" @mouseover="stop" @mouseleave="play">
+    <div class="window" @mouseover="stop" @mouseleave="play" ref="imgWindow">
       <ul class="container" :style="containerStyle">
         <li>
           <img :style="{width:imgWidth+'px'}" :src="sliders[sliders.length - 1].img" alt="">
@@ -72,7 +72,9 @@ export default {
       distance: -1 * document.body.clientWidth,
       transitionEnd: true,
       speed: this.initialSpeed,
-      imgSize: 0
+      imgSize: 0,
+      imgRealWidth: 0,
+      imgRealHeight: 0
     }
   },
   computed: {
@@ -94,8 +96,18 @@ export default {
       }
       this.sliders = imgs
       this.imgSize = datas.length
+      if (this.imgSize > 0) {
+        var img = new Image()
+        img.src = imgs[0].img
+        if (img.complete) {
+          this.imgRealWidth = img.width
+          this.imgRealHeight = img.height
+          this.$refs.imgWindow.style.height = this.imgRealHeight * this.imgWidth / this.imgRealWidth + 'px'
+        }
+      }
     })
     this.init()
+    // alert(document.body.clientHeight)
   },
   methods: {
     init () {
