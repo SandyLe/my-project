@@ -53,6 +53,14 @@ const getBrandList = function () {
     method: 'get'
   })
 }
+const getProductTypeList = function () {
+  return axios.request({
+    url: '/fc/productType/getList',
+    dataType: 'jsonp',
+    crossDomain: true,
+    method: 'get'
+  })
+}
 const getPageData = function (pageData) {
   return axios.request({
     url: '/fc/' + pageData.identity + '/getPage',
@@ -72,4 +80,4 @@ const getPath = function (newsType) {
     method: 'get'
   })
 }
-export { getTestData, getMenuLevelFirst, getSlidePics, getHotProductList, getBrandList, getPageData, getOneData, getPath }
+export { getTestData, getMenuLevelFirst, getSlidePics, getHotProductList, getBrandList, getPageData, getOneData, getPath, getProductTypeList }

@@ -64,6 +64,7 @@ export default {
   margin: 0 auto;
   border-top: 1px solid #CDCDCD;
   padding-top: 30px;
+  clear: both;
 }
 
 .foot-nav-block ul li{
