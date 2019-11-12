@@ -8,12 +8,12 @@
           <div style="width: 100%;">产品分类</div>
           <div class="leftMenuContent">
             <ul>
-              <li v-for="(item,index) in productTypeList" :key="index">
-                <div style="font-weight: bold"><a href="#">{{item.productType.name}}</a></div>
+              <li class="productTypeUL" v-for="(item,index) in productTypeList" :key="index">
+                <div style="font-weight: bold; text-decoration: underline"><a href="javascript:void(0)" @click="getBrandList(item.productType.code)">{{item.productType.name}}</a></div>
                 <div>
                   <ul>
-                    <li v-for="(item1,index1) in item.brandList" :key="index1">
-                    <a style="font-size:14px" :href="'#/brand/' + item1.id">{{item1.name}}</a>
+                    <li class="brandUL" v-for="(item1,index1) in item.brandList" :key="index1">
+                      <a style="font-size:14px" :href="'#/brand/' + item1.id">{{item1.name}}</a>
                     </li>
                   </ul>
                 </div>
@@ -22,33 +22,22 @@
           </div>
         </div>
         <div class="rightContent">
-          Right
+          <ul>
+            <li v-for="(item,index) in brandList" :key="index">
+              <div class="brandName">{{item.name}}</div>
+              <div v-if="item.imgUrl" class="brandImg">
+                <img :src="item.imgUrl" width="100%" height="250px"/>
+              </div>
+            </li>
+          </ul>
         </div>
-        <ul>
-          <li v-for="(item,index) in brandList" :key="index">
-            <div v-if="index % 2 === 0">
-              <div class="contentLeft">
-                <h4>{{item.name}}</h4>
-                <p>{{item.description}}</p>
-              </div>
-              <div class="contentRight"><img :src="item.imgUrl"/></div>
-            </div>
-            <div v-else>
-              <div class="contentLeft"><img :src="item.imgUrl"/></div>
-              <div class="contentRight">
-                <h4>{{item.name}}</h4>
-                <p>{{item.description}}</p>
-              </div>
-            </div>
-          </li>
-        </ul>
       </div>
     </div>
 </template>
 
 <script>
 
-import {getSlidePics, getProductTypeList} from './../api/data'
+import {getSlidePics, getProductTypeList, getBrandList} from './../api/data'
 import config from '../../config'
 const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
 export default {
@@ -56,7 +45,15 @@ export default {
   data () {
     return {
       img: baseUrl + '../assets/hf.jpg',
-      productTypeList: []
+      productTypeList: [],
+      brandList: []
+    }
+  },
+  methods: {
+    getBrandList (code) {
+      getBrandList(code).then(res => {
+        this.brandList = res.data.data
+      })
     }
   },
   mounted () {
@@ -66,6 +63,9 @@ export default {
     })
     getProductTypeList().then(res => {
       this.productTypeList = res.data.data
+    })
+    getBrandList().then(res => {
+      this.brandList = res.data.data
     })
   }
 }
@@ -77,19 +77,67 @@ export default {
   margin: 0 auto;
 }
 .leftMenu{
-  width: 30%;
+  width: 25%;
   float: left;
 }
 .rightContent{
-  width: 70%;
+  width: 75%;
   float: left;
 }
 .leftMenuContent{
   width: 99%;
   border: #ededed 1px solid;
 }
+.brandUL {
+  margin: 5px;
+  float: left;
+}
+.leftMenuContent ul li ul li a{
+  color: #333333;
+}
+.leftMenuContent ul li ul li a:hover{
+  text-decoration: underline;
+  color: #CC5522;
+}
+.brandUL a:link{
+  color: #888888;
+}
+.brandUL a:visited{
+  color: #888888;
+}
+.productTypeUL {
+  clear: both;
+}
+.leftMenuContent ul li div a{
+  text-decoration: none;
+  color: #CC5522;
+}
+.leftMenuContent ul li div a:hover{
+  color: #CC5522;
+}
+.leftMenuContent ul li div a:link{
+  color: #888888;
+}
+.leftMenuContent ul li div a:visited{
+  color: #888888;
+}
 .brandContent li {
   list-style-type:none;
-  overflow: auto;
+}
+.brandName{
+  text-align: center;
+  line-height: 250px;
+  background-color: #f2f2f2;
+  width: 30%;
+  float: left;
+}
+.brandImg{
+  width: 60%;
+  float: left;
+  padding: 0 4%;
+}
+.rightContent ul li {
+  padding: 4%;
+  clear: both;
 }
 </style>

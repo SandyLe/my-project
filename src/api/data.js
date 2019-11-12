@@ -45,12 +45,13 @@ const getHotProductList = function () {
   })
 }
 
-const getBrandList = function () {
+const getBrandList = function (code) {
   return axios.request({
     url: '/fc/brand/getList',
     dataType: 'jsonp',
     crossDomain: true,
-    method: 'get'
+    method: 'get',
+    params: {productTypeCode: code}
   })
 }
 const getProductTypeList = function () {
