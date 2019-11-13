@@ -1,8 +1,6 @@
 <template>
     <div id="brand">
-      <div>
-        <img :src="img" style="width: 100%;"/>
-      </div>
+      <app-slider v-bind:sliders="sliders" v-bind:imgHeight="imgHeight" v-bind:imgSize="imgSize"></app-slider>
       <div class="brandContent">
         <ul>
           <li v-for="(item,index) in brandList" :key="index">
@@ -23,19 +21,20 @@
           </li>
         </ul>
       </div>
+      <app-scrollview></app-scrollview>
     </div>
 </template>
 
 <script>
-
-import {getSlidePics, getBrandList} from './../api/data'
+import Slider from './Slider.vue'
+import ScrollView from './SV01'
+import {getOneData, getBrandList} from './../api/data'
 import config from '../../config'
 const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
 export default {
   name: 'brand',
   data () {
     return {
-      img: baseUrl + '../assets/hf.jpg',
       brandList: [{
         name: '品牌名称',
         description: 'ping pai 简介，介绍……',
@@ -44,13 +43,38 @@ export default {
         name: '品牌名称',
         description: 'ping pai 简介，介绍……',
         imgUrl: baseUrl + '/upload/QYFC/1569998168630-35457943.jpg'
-      }]
+      }],
+      sliders: [],
+      imgSize: 0,
+      imgHeight: 0,
+      imgRealWidth: 0,
+      imgRealHeight: 0,
+      imgWidth: document.body.clientWidth
     }
   },
+  components: {
+    'app-slider': Slider,
+    'app-scrollview': ScrollView
+  },
   mounted () {
-    getSlidePics('CPPP', 1).then(res => {
-      var datas = res.data.data
-      this.img = datas[0]
+    var id = this.$route.params.id
+    getOneData('brand', id).then(res => {
+      var datas = res.data.data.imgs.split(';')
+      var imgs = new Array(datas.length)
+      for (var i = 0; i < datas.length; i++) {
+        imgs[i] = {'img': datas[i]}
+      }
+      this.sliders = imgs
+      this.imgSize = datas.length
+      if (this.imgSize > 0) {
+        var img = new Image()
+        img.src = imgs[0].img
+        if (img.complete) {
+          this.imgRealWidth = img.width
+          this.imgRealHeight = img.height
+          this.imgHeight = this.imgRealHeight * this.imgWidth / this.imgRealWidth
+        }
+      }
     })
     getBrandList().then(res => {
       this.brandList = res.data.data

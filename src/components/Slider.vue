@@ -1,6 +1,6 @@
 <template>
   <div id="slider">
-    <div class="window" @mouseover="stop" @mouseleave="play" ref="imgWindow">
+    <div class="window" :style="{height:imgHeight+'px'}" @mouseover="stop" @mouseleave="play" ref="imgWindow">
       <ul class="container" :style="containerStyle">
         <li>
           <img :style="{width:imgWidth+'px'}" :src="sliders[sliders.length - 1].img" alt="">
@@ -32,9 +32,9 @@
 </template>
 
 <script>
-import {getSlidePics} from './../api/data'
-import config from '../../config'
-const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
+// import {getSlidePics} from './../api/data'
+// import config from '../../config'
+// const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
 
 export default {
   name: 'slider',
@@ -46,35 +46,18 @@ export default {
     initialInterval: {
       type: Number,
       default: 3
-    }
+    },
+    sliders: [],
+    imgHeight: 0,
+    imgSize: 0
   },
   data () {
     return {
-      sliders: [
-        {
-          img: baseUrl + '/upload/LUNBOTUCE/1567953545289455973029.jpeg'
-        },
-        {
-          img: '../static/index01.jpeg'
-        },
-        {
-          img: '../static/index02.jpeg'
-        },
-        {
-          img: '../static/index03.jpeg'
-        },
-        {
-          img: '../static/mainVis02.jpg'
-        }
-      ],
       imgWidth: document.body.clientWidth,
       currentIndex: 1,
       distance: -1 * document.body.clientWidth,
       transitionEnd: true,
-      speed: this.initialSpeed,
-      imgSize: 0,
-      imgRealWidth: 0,
-      imgRealHeight: 0
+      speed: this.initialSpeed
     }
   },
   computed: {
@@ -88,26 +71,7 @@ export default {
     }
   },
   mounted () {
-    getSlidePics('LUNBOTUCE', 5).then(res => {
-      var datas = res.data.data
-      var imgs = new Array(datas.length)
-      for (var i = 0; i < datas.length; i++) {
-        imgs[i] = {'img': datas[i]}
-      }
-      this.sliders = imgs
-      this.imgSize = datas.length
-      if (this.imgSize > 0) {
-        var img = new Image()
-        img.src = imgs[0].img
-        if (img.complete) {
-          this.imgRealWidth = img.width
-          this.imgRealHeight = img.height
-          this.$refs.imgWindow.style.height = this.imgRealHeight * this.imgWidth / this.imgRealWidth + 'px'
-        }
-      }
-    })
     this.init()
-    // alert(document.body.clientHeight)
   },
   methods: {
     init () {
@@ -116,7 +80,7 @@ export default {
       window.onfocus = function () { this.play() }.bind(this)
     },
     move (offset, direction, speed) {
-      console.log(speed)
+      debugger
       if (offset === 1024) {
         offset = this.imgWidth
       }
