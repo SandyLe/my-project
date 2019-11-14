@@ -80,7 +80,6 @@ export default {
       window.onfocus = function () { this.play() }.bind(this)
     },
     move (offset, direction, speed) {
-      debugger
       if (offset === 1024) {
         offset = this.imgWidth
       }

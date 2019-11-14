@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import { getHotProductList } from './../api/data'
 // import config from '../../config'
 // const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
 
@@ -15,8 +14,10 @@ export default {
   name: 'IndexProducts',
   data () {
     return {
-      hotproductList: []
     }
+  },
+  props: {
+    hotproductList: []
   },
   methods: {
     openOutSite (item) {
@@ -27,12 +28,7 @@ export default {
     }
   },
   mounted () {
-    getHotProductList(6).then(res => {
-      this.hotproductList = res.data.data
-      this.hotproductList.forEach(function (e) {
-        e.imgUrl = e.imgUrl
-      })
-    })
+
   }
 }
 </script>

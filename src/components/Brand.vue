@@ -1,26 +1,10 @@
 <template>
     <div id="brand">
       <app-slider v-bind:sliders="sliders" v-bind:imgHeight="imgHeight" v-bind:imgSize="imgSize"></app-slider>
-      <div class="brandContent">
-        <ul>
-          <li v-for="(item,index) in brandList" :key="index">
-            <div v-if="index % 2 === 0">
-              <div class="contentLeft">
-                <h4>{{item.name}}</h4>
-                <p>{{item.description}}</p>
-              </div>
-              <div class="contentRight"><img :src="item.imgUrl"/></div>
-            </div>
-            <div v-else>
-              <div class="contentLeft"><img :src="item.imgUrl"/></div>
-              <div class="contentRight">
-                <h4>{{item.name}}</h4>
-                <p>{{item.description}}</p>
-              </div>
-            </div>
-          </li>
-        </ul>
+      <div>
+        <img :src="img" style="width: 100%;"/>
       </div>
+      <app-products v-bind:hotproductList="hotproductList"></app-products>
       <app-scrollview></app-scrollview>
     </div>
 </template>
@@ -28,7 +12,8 @@
 <script>
 import Slider from './Slider.vue'
 import ScrollView from './SV01'
-import {getOneData, getBrandList} from './../api/data'
+import IndexProducts from './IndexProducts'
+import {getOneData, getBrandList, getHotProductList} from './../api/data'
 import config from '../../config'
 const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
 export default {
@@ -44,21 +29,25 @@ export default {
         description: 'ping pai 简介，介绍……',
         imgUrl: baseUrl + '/upload/QYFC/1569998168630-35457943.jpg'
       }],
+      img: '',
       sliders: [],
       imgSize: 0,
       imgHeight: 0,
       imgRealWidth: 0,
       imgRealHeight: 0,
-      imgWidth: document.body.clientWidth
+      imgWidth: document.body.clientWidth,
+      hotproductList: []
     }
   },
   components: {
     'app-slider': Slider,
+    'app-products': IndexProducts,
     'app-scrollview': ScrollView
   },
   mounted () {
     var id = this.$route.params.id
     getOneData('brand', id).then(res => {
+      this.img = res.data.data.introduction
       var datas = res.data.data.imgs.split(';')
       var imgs = new Array(datas.length)
       for (var i = 0; i < datas.length; i++) {
@@ -75,6 +64,18 @@ export default {
           this.imgHeight = this.imgRealHeight * this.imgWidth / this.imgRealWidth
         }
       }
+      const that = this
+      getHotProductList(6, res.data.data.code).then(ress1 => {
+        const dataList = ress1.data.data
+        const urlArray = []
+        dataList.forEach(function (e) {
+          if (e.imgUrl && e.imgUrl !== '') {
+            e.imgUrl = e.imgUrl
+            urlArray[urlArray.length] = e
+          }
+        })
+        that.hotproductList = urlArray
+      })
     })
     getBrandList().then(res => {
       this.brandList = res.data.data

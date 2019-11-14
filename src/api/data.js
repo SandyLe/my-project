@@ -36,10 +36,13 @@ const getMenuLevelFirst = function () {
   })
 }
 
-const getHotProductList = function () {
+const getHotProductList = function (top, brandCode) {
   return axios.request({
-    url: '/fc/hotProduct/getList?top=6',
-    dataType: 'jsonp',
+    url: '/fc/hotProduct/getList',
+    params: {
+      top: top,
+      brandCode: brandCode
+    },
     crossDomain: true,
     method: 'get'
   })
