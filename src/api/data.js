@@ -84,4 +84,11 @@ const getPath = function (newsType) {
     method: 'get'
   })
 }
-export { getTestData, getMenuLevelFirst, getSlidePics, getHotProductList, getBrandList, getPageData, getOneData, getPath, getProductTypeList }
+
+const getIndexConfig = function () {
+  return axios.request({
+    url: '/fc/indexConfig/getList',
+    method: 'get'
+  })
+}
+export { getTestData, getMenuLevelFirst, getSlidePics, getHotProductList, getBrandList, getPageData, getOneData, getPath, getProductTypeList, getIndexConfig }

@@ -9,22 +9,22 @@
                 <span v-else><router-link :to="item.url">{{item.name}}</router-link></span>
               </div>
               <div class="foot-nav-block">
-                <ul class="btn-list-area">
-                  <li class="btn" v-for="(item1,index1) in item.children" :key="index1" >
+                <ul class="foot-btn-list-area">
+                  <li v-for="(item1,index1) in item.children" :key="index1" >
                     <span v-if="item1.isOutSite"><a href="javascript:void(0)" @click="openOutSite(item1)" target="_blank">{{item1.name}}</a></span>
                     <span v-else><router-link :to="item1.url">{{item1.name}}</router-link></span>
-                    <ul class="btn-list-area1">
+                    <!--<ul class="btn-list-area1">
                       <li class="btn" v-for="(item2,index2) in item1.children" :key="index2" >
                         <span v-if="item2.isOutSite"><a href="javascript:void(0)" @click="openOutSite(item2)" target="_blank">{{item2.name}}</a></span>
                         <span v-else><a href="#">{{item2.name}}</a></span>
                       </li>
-                    </ul>
+                    </ul>-->
                   </li>
                 </ul>
               </div>
             </li>
-            <li><img src="../../static/WeChat.png"/></li>
-            <li><img src="../../static/WeBo.png"/></li>
+            <!--<li><img src="../../static/WeChat.png"/></li>
+            <li><img src="../../static/WeBo.png"/></li>-->
           </ul>
         </div>
       </div>
@@ -78,7 +78,8 @@ export default {
   height: 200px;
 }
 .foot-nav ul{
-  float:right;
+  width: 50%;
+  margin:0 auto;
 }
 .foot-nav ul li{
   float: left;
@@ -96,7 +97,23 @@ export default {
   margin-top: 20px;
 }
 
+.foot-nav-block{
+  padding: 0;
+}
 .foot-nav-block ul li a {
   text-decoration: none;
+}
+
+.foot-btn-list-area ul{
+  margin: 0 auto;
+  width: 100px;
+  padding: 0;
+}
+.foot-btn-list-area ul li{
+  clear: both;
+  margin: 0 auto;
+  padding: 0;
+  width: 100px;
+  text-align: center;
 }
 </style>

@@ -1,27 +1,27 @@
 <template>
     <div id = "index">
       <app-slider v-bind:sliders="sliders" v-bind:imgHeight="imgHeight" v-bind:imgSize="imgSize"></app-slider>
-      <div>
-        <img :src="img" style="width: 100%;"/>
+      <div class="content">
+        <ul>
+          <li v-for="(item,index) in imgs" :key="index">
+            <div v-if="item.url">
+              <img :src="item.url" width="100%"/>
+            </div>
+          </li>
+        </ul>
       </div>
-      <app-products></app-products>
-      <app-scrollview></app-scrollview>
     </div>
 </template>
 
 <script>
 import Slider from './Slider.vue'
-import IndexProducts from './IndexProducts'
-import ScrollView from './SV01'
-import {getSlidePics} from './../api/data'
-import config from '../../config'
-const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
+import {getSlidePics, getIndexConfig} from './../api/data'
 
 export default {
   name: 'index',
   data () {
     return {
-      img: baseUrl + '../assets/hf.jpg',
+      imgs: [],
       sliders: [],
       imgSize: 0,
       imgHeight: 0,
@@ -31,14 +31,12 @@ export default {
     }
   },
   components: {
-    'app-slider': Slider,
-    'app-products': IndexProducts,
-    'app-scrollview': ScrollView
+    'app-slider': Slider
   },
   mounted () {
-    getSlidePics('HFGG', 1).then(res => {
+    getIndexConfig().then(res => {
       var datas = res.data.data
-      this.img = datas[0]
+      this.imgs = datas
     })
     getSlidePics('LUNBOTUCE', 5).then(res => {
       var datas = res.data.data
@@ -63,4 +61,13 @@ export default {
 </script>
 
 <style scoped>
+  .content ul{
+    margin: 0;
+    padding: 0;
+  }
+  .content ul li{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 </style>
