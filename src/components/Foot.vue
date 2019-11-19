@@ -103,17 +103,16 @@ export default {
 .foot-nav-block ul li a {
   text-decoration: none;
 }
-
-.foot-btn-list-area ul{
-  margin: 0 auto;
-  width: 100px;
+.foot-nav-block ul {
   padding: 0;
+  width: 100%;
 }
-.foot-btn-list-area ul li{
+.foot-nav-block ul li {
+  width: 100%;
+}
+.foot-btn-list-area li{
   clear: both;
   margin: 0 auto;
   padding: 0;
-  width: 100px;
-  text-align: center;
 }
 </style>
