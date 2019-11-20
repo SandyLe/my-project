@@ -40,6 +40,11 @@ export default new Router({
       path: '/brandList/:mtlType',
       name: 'BrandList',
       component: BrandList
+    },
+    {
+      path: '/brandList',
+      name: 'BrandList',
+      component: BrandList
     }
   ]
 })

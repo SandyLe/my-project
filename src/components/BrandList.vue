@@ -24,9 +24,9 @@
         <div class="rightContent">
           <ul>
             <li v-for="(item,index) in brandList" :key="index">
-              <div class="brandName">{{item.name}}</div>
+              <div class="brandName"><a style="font-size:14px" :href="'#/brand/' + item.id">{{item.name}}</a></div>
               <div v-if="item.imgUrl" class="brandImg">
-                <img :src="item.imgUrl" width="100%" height="250px"/>
+                <a style="font-size:14px" :href="'#/brand/' + item.id"><img :src="item.imgUrl" width="100%" height="250px"/></a>
               </div>
             </li>
           </ul>
@@ -46,7 +46,8 @@ export default {
     return {
       img: baseUrl + '../assets/hf.jpg',
       productTypeList: [],
-      brandList: []
+      brandList: [],
+      productType: ''
     }
   },
   methods: {
@@ -56,7 +57,17 @@ export default {
       })
     }
   },
+  watch: {
+    '$route' (to, from) {
+      if (this.$route.params.mtlType) {
+        getBrandList(this.$route.params.mtlType).then(res => {
+          this.brandList = res.data.data
+        })
+      }
+    }
+  },
   mounted () {
+    var mtlType = this.$route.params.mtlType
     getSlidePics('CPPP', 1).then(res => {
       var datas = res.data.data
       this.img = datas[0]
@@ -64,7 +75,7 @@ export default {
     getProductTypeList().then(res => {
       this.productTypeList = res.data.data
     })
-    getBrandList().then(res => {
+    getBrandList(mtlType).then(res => {
       this.brandList = res.data.data
     })
   }
@@ -83,14 +94,20 @@ export default {
 .rightContent{
   width: 75%;
   float: left;
+  padding-bottom: 20px;
 }
 .leftMenuContent{
   width: 99%;
   border: #ededed 1px solid;
+  padding-bottom: 20px;
 }
 .brandUL {
   margin: 5px;
   float: left;
+}
+.leftMenuContent ul{
+  padding-left: 2%;
+  padding-left: 2%;
 }
 .leftMenuContent ul li ul li a{
   color: #333333;
@@ -130,6 +147,12 @@ export default {
   background-color: #f2f2f2;
   width: 30%;
   float: left;
+}
+.brandName a:link{
+  text-decoration: none;
+}
+.brandName a:visited{
+  text-decoration: none;
 }
 .brandImg{
   width: 60%;
