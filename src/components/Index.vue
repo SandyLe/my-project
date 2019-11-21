@@ -46,7 +46,7 @@ export default {
         var img = new Image()
         img.src = imgs[0].img
         this.imgHeight = 350
-        if (img.complete) {
+        img.onload = () => {
           this.imgRealWidth = img.width
           this.imgRealHeight = img.height
           this.imgHeight = this.imgRealHeight * this.imgWidth / this.imgRealWidth
