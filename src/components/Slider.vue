@@ -47,12 +47,13 @@ export default {
       type: Number,
       default: 3
     },
-    sliders: [],
+    slidersTData: [],
     imgHeight: 0,
     imgSize: 0
   },
   data () {
     return {
+      sliders: [],
       imgWidth: document.body.clientWidth,
       currentIndex: 1,
       distance: -1 * document.body.clientWidth,
@@ -71,7 +72,7 @@ export default {
     }
   },
   mounted () {
-    this.init()
+    this.sliders = this.slidersTData
   },
   methods: {
     init () {
@@ -127,6 +128,19 @@ export default {
     stop () {
       window.clearInterval(this.timer)
       this.timer = null
+    }
+  },
+  watch: {
+    imgHeight (newHeight, oldHeight) {
+      this.imgHeight = newHeight
+    },
+    imgSize (newImgSize, oldImgSize) {
+      this.imgSize = newImgSize
+    },
+    slidersTData (newData, oldValue) {
+      newData = JSON.parse(JSON.stringify(newData))
+      this.sliders = newData
+      this.init()
     }
   }
 }

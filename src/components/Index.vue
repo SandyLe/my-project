@@ -1,6 +1,6 @@
 <template>
     <div id = "index">
-      <app-slider v-bind:sliders="sliders" v-bind:imgHeight="imgHeight" v-bind:imgSize="imgSize"></app-slider>
+      <app-slider v-bind:slidersTData="slidersTData" v-bind:imgHeight="imgHeight" v-bind:imgSize="imgSize"></app-slider>
       <div class="content">
         <ul>
           <li v-for="(item,index) in imgs" :key="index">
@@ -22,7 +22,7 @@ export default {
   data () {
     return {
       imgs: [],
-      sliders: [],
+      slidersTData: [],
       imgSize: 0,
       imgHeight: 0,
       imgRealWidth: 0,
@@ -34,27 +34,28 @@ export default {
     'app-slider': Slider
   },
   mounted () {
-    getIndexConfig().then(res => {
-      var datas = res.data.data
-      this.imgs = datas
-    })
     getSlidePics('LUNBOTUCE', 5).then(res => {
       var datas = res.data.data
-      var imgs = new Array(datas.length)
+      let imgs = []
       for (var i = 0; i < datas.length; i++) {
-        imgs[i] = {'img': datas[i]}
+        imgs.push({'img': datas[i]})
       }
-      this.sliders = imgs
+      this.slidersTData = imgs
       this.imgSize = datas.length
       if (this.imgSize > 0) {
         var img = new Image()
         img.src = imgs[0].img
+        this.imgHeight = 350
         if (img.complete) {
           this.imgRealWidth = img.width
           this.imgRealHeight = img.height
           this.imgHeight = this.imgRealHeight * this.imgWidth / this.imgRealWidth
         }
       }
+    })
+    getIndexConfig().then(res => {
+      var datas = res.data.data
+      this.imgs = datas
     })
   }
 }
