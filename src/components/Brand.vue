@@ -1,6 +1,6 @@
 <template>
     <div id="brand">
-      <app-slider v-bind:sliders="sliders" v-bind:imgHeight="imgHeight" v-bind:imgSize="imgSize"></app-slider>
+      <app-slider v-bind:slidersTData="slidersTData" v-bind:imgHeight="imgHeight" v-bind:imgSize="imgSize"></app-slider>
       <div>
         <img :src="img" style="width: 100%;"/>
       </div>
@@ -53,7 +53,7 @@ export default {
       for (var i = 0; i < datas.length; i++) {
         imgs[i] = {'img': datas[i]}
       }
-      this.sliders = imgs
+      this.slidersTData = imgs
       this.imgSize = datas.length
       if (this.imgSize > 0) {
         var img = new Image()
