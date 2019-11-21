@@ -39,6 +39,46 @@ export default {
       hotproductList: []
     }
   },
+  watch: {
+    '$route' (to, from) {
+      if (this.$route.params.id) {
+        getOneData('brand', this.$route.params.id).then(res => {
+          this.img = res.data.data.introduction
+          var datas = []
+          if (res.data.data.imgs) {
+            datas = res.data.data.imgs.split(';')
+          }
+          var imgs = new Array(datas.length)
+          for (var i = 0; i < datas.length; i++) {
+            imgs[i] = {'img': datas[i]}
+          }
+          this.slidersTData = imgs
+          this.imgSize = datas.length
+          if (this.imgSize > 0) {
+            var img = new Image()
+            img.src = imgs[0].img
+            img.onload = () => {
+              this.imgRealWidth = img.width
+              this.imgRealHeight = img.height
+              this.imgHeight = this.imgRealHeight * this.imgWidth / this.imgRealWidth
+            }
+          }
+          const that = this
+          getHotProductList(6, res.data.data.code).then(ress1 => {
+            const dataList = ress1.data.data
+            const urlArray = []
+            dataList.forEach(function (e) {
+              if (e.imgUrl && e.imgUrl !== '') {
+                e.imgUrl = e.imgUrl
+                urlArray[urlArray.length] = e
+              }
+            })
+            that.hotproductList = urlArray
+          })
+        })
+      }
+    }
+  },
   components: {
     'app-slider': Slider,
     'app-products': IndexProducts,
@@ -48,7 +88,10 @@ export default {
     var id = this.$route.params.id
     getOneData('brand', id).then(res => {
       this.img = res.data.data.introduction
-      var datas = res.data.data.imgs.split(';')
+      var datas = []
+      if (res.data.data.imgs) {
+        datas = res.data.data.imgs.split(';')
+      }
       var imgs = new Array(datas.length)
       for (var i = 0; i < datas.length; i++) {
         imgs[i] = {'img': datas[i]}
