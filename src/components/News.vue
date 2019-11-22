@@ -8,7 +8,7 @@
       </div>
       <div class="newsListContent">
         <h3 style="text-align: center">{{ newsData.name }}</h3>
-        <p  style="text-align: center; font-size:10px">{{newsData.updateDate}}</p>
+        <!--<p  style="text-align: center; font-size:10px">{{newsData.updateDate}}</p>-->
         <div v-html="newsData.content"></div>
       </div>
     </div>
