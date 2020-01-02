@@ -29,7 +29,17 @@
         </div>
       </div>
       <div class="foot-auth">
-        <p style="width: 90%; margin: 0 auto; float: right"><img src="../assets/wjlogo.jpg" style="width: 50px; float: right"/>版权信息@上海文疆商贸·上海 <a href="http://www.beian.miit.gov.cn">沪ICP备19038640号</a>  2019.10.30</p>
+        <div style="width: 90%; margin: 0 auto; float: right; color:#939393;">
+          版权@上海文疆商贸 * <a href="http://www.beian.miit.gov.cn">沪ICP备19038640号</a>
+          <div style="width:300px;margin:0 auto; padding:0px 0;">
+            <a target="_blank" href="" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+              <img src="../assets/gh.png" style="float:left;"/>
+              <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">沪公网安备 31010602005204号</p>
+            </a >
+          </div>
+          <div style="width: 90%; margin: -35px auto 0 auto; float: right"><img src="../assets/wjlogo.jpg" style="width: 50px; float: right"/></div>
+
+        </div>
       </div>
     </div>
 </template>
@@ -114,5 +124,14 @@ export default {
   clear: both;
   margin: 0 auto;
   padding: 0;
+}
+.foot-auth a:hover {
+  color:#939393;
+}
+.foot-auth a:link {
+  color:#939393;
+}
+.foot-auth a:visited {
+  color:#939393;
 }
 </style>
